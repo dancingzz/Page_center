@@ -1,0 +1,610 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow: hidden;
+}
+/* 头部区 */
+#top{
+    width: 100%;
+    height: 50px;
+    background-color: #1F2933;
+    position: relative;
+    z-index: 1;
+    box-shadow: rgb(37 39 41) 0 0 15px 7px;
+
+}
+.project{
+    display: flex;
+    justify-content: space-around;
+}
+.project li{
+    position: relative;
+    text-align: center;
+    list-style-type: none;
+    line-height: 50px;
+    height: 50px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+}
+
+.project li img{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-bottom: -7px;
+}
+/* 脚部区 */
+#foo{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    /* box-shadow: 0px 20px 70px 5px  #0099CC inset; */
+    background-color: #1F2933;
+    color: #fff;
+    position: relative;
+    bottom: -50px;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+/* 内容区 */
+#main{
+    width: 100%;
+    min-height: 800px;
+    /* display: flex; */
+    position: relative;
+}
+/* 导航栏区 */
+#wrap{
+    /* display: none; */
+    width: 190px;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    background-color: #424c56;
+    overflow: hidden;
+    user-select: none;
+}
+.back{
+    transform: translateX(-190px);
+    /* display: block; */
+}
+#wrap li{
+    box-sizing: border-box;
+    line-height: 50px;
+    list-style: none;
+    /* background-color: #F2F2F2; */
+    color: #fff;
+    cursor: pointer;
+}
+#wrap li button{
+    width: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+#wrap li>div{
+    line-height: 50px;
+    list-style: none;
+    color: #fff;
+    cursor: pointer;
+    /* box-shadow: -5px 5px 10px #586673; */
+    position: relative;
+}
+.ap{
+    background-color:#2d3a4e;
+    box-shadow: rgb(0, 0, 0) 0px 15px 10px -15px inset, rgb(0, 0, 0) 0px -15px 15px -15px inset;
+}
+.aa{
+    text-decoration: none;
+    color: #fff;
+}
+.orange{
+    color: orange !important;
+}
+
+/* 卡片区 */
+#card{
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+    background-color:#E3DFE3;
+    padding: 30px 0;
+    scroll-snap-type: y mandatory;
+    transition: all .5s;
+}
+#cardtain{
+    display: grid;
+    grid-gap:10px;
+    grid-template-columns: repeat(auto-fit,300px);
+    grid-template-rows: repeat(auto-fit,500px);
+    justify-content: center;
+}
+#cardtain>div{
+    scroll-snap-stop: always;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+    min-width: 273px;
+    margin: 10px;
+    border: 1px solid #8091AB;
+    cursor: pointer;
+    box-shadow:
+    1px 1px 4px 0px rgba(250,254,118,0.75),
+    2px 2px 5px -3px rgba(254,159,50,0.75),
+    6px 6px 8px -4px rgba(255,255,0,0.75),
+    6px 6px 8px -4px rgba(0,0,255,2.75),9px 9px 11px -7px rgb(0 0 0 / 66%);
+
+}
+/* 卡片图片 */
+#card .photo{
+    width: 100%;
+    height: 100%;
+    transition: all .3s;
+}   
+#card img{
+    width: 100%;
+    height: 100%;
+}
+/* 卡片评级 */
+#card .leve{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255,255,255,60%);
+    font-size: 22px;
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    line-height: 30px;
+}
+/* 卡片按钮 */
+#card .edit{
+    transform: scale(0);
+    width: 80px;
+    line-height: 80px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-left: -40px;
+    background-color:  #6A91A8;
+    color: #fff;
+    font-size: 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+#card .prew{
+    width: 80px;
+    line-height: 80px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(179,179,179,.5);
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+/* 卡片其余内容 */
+#card .cal{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(255,255,255,60%);
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid green;
+    letter-spacing: 2px;
+    color: green;
+}
+#card .all{
+    box-sizing: border-box;
+    font-size: 15px;
+    padding: 9px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color:rgb(6, 7, 6);
+    font-weight: 600;
+    background-color: rgba(236, 236, 233, 0.5);
+}
+#card .all>div{
+    line-height: 25px;
+}
+/* 添加卡片 */
+#add{
+    min-width: 300px;
+    min-height: 500px;
+    text-align: center;
+    font-size: 100px;
+    user-select: none;
+    position: relative;
+}
+#add>.lose1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -7%;
+    margin-left: -15%;
+    background-color: #000;
+    width: 30%;
+    height: 3%; 
+    border-radius: 5px;
+}
+#add>.lose2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -22%;
+    margin-left: -2%;
+    background-color: #000;
+    width: 5%;
+    height: 20%; 
+    border-radius: 5px;
+}
+/* 按钮区 */
+#btn{
+    position: fixed;
+    z-index: 100000;
+    bottom: 15px;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 2px;
+    text-align: center;
+    background-color: rgba(0,0,0,.7);
+    color: #fff;
+}
+/* 导航栏阴影 */
+#tc{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.8);
+    /* z-index: 1; */
+}
+
+/* 卡片弹窗or项目弹窗 */
+.bigger{
+    width: 100%;
+}
+.gray{
+    background-color: #bfbebf !important;
+}
+.myform,#myproject{
+    text-align: left;
+    font-size: 16px;
+    width: 100%;
+}
+.layui-layer-title{
+    font-size: 16px;
+    text-align: left;
+}
+
+.view{
+    background-color:#bfbebf !important;
+}
+/* 弹窗内容 */
+.layui-layer-page .layui-layer-content{
+    padding: 15px 20px 0;
+    display: flex;
+    justify-content: center;
+}
+.myform input,
+#myproject input{
+    background-color:#e2dfdf;
+    box-sizing: border-box;
+    display: inline-block;
+    width: calc(100% - 90px);
+    height: 36px;
+    margin-bottom: 10px;
+    line-height: 30px;
+    padding-left: 10px;
+    border-radius: 5px;
+    color: #333;
+    outline: none;
+    border-bottom: 2px solid rgb(230, 230, 230);
+    border-right: 2px solid rgb(230, 230, 230);
+    border-top: 2px solid #9c9898;
+    border-left: 2px solid #9c9898;
+}
+.myform input:focus,
+#myproject input:focus,
+.main .code textarea:focus{
+    box-shadow:inset 0px 0px 5px 1px #000;
+    border: 1px solid black;
+}
+#myproject input{
+    margin-bottom: 15px;
+}
+
+/* 信息说明 */
+.myform .formhead,
+#myproject .formhead{
+    display: inline-block;
+    width: 80px;
+    text-align-last:justify;
+    font-size: 15px;
+}
+.dm{
+    line-height: 100px;
+    float: left;
+}
+.myform>div{
+    display: flex;
+    line-height: 36px;
+}
+.myform>div input{
+    width: 15px;
+    margin: 0 5px 0 15px;
+}
+.myform textarea{
+    width: calc(100% - 90px);
+    height: 150px;
+    background-color:  #e2dfdf;
+    margin-left: 5px;
+}
+.myform>form{
+    margin-bottom: 10px;
+}
+
+
+/* 单选样式 */
+.single {
+    overflow:hidden;
+    border-bottom:#e5e5e5 solid 1px;
+    border-bottom:none;
+}
+#ss3{
+    margin-bottom: 15px;
+}
+.fb{
+    line-height: 40px;
+}
+.label_box{
+    width: calc(100% - 60px);
+    display: flex;
+    justify-content: center;
+}
+.label_box>label {
+    display:block;
+    float:left;
+    margin:0 10px 0 0;
+    position:relative;
+    overflow:hidden;
+}
+.label_box>label:last-child{
+    margin: 0;
+}
+.label_box>label>input {
+    position:absolute;
+    top:0;
+    left:-20px;
+    width: 0;
+}
+.label_box>label>div {
+    width:80px;
+    text-align:center;
+    border:#6f6f6f solid 1px;
+    font-size: 14px;
+    height:35px;
+    line-height:35px;
+    color:black;
+    user-select:none;
+    overflow:hidden;
+    position:relative;
+    transition: all .5s;
+    background-color: #d0d0d0;
+}
+#ss3 .label_box>label>div{
+    width: 45px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 20px;
+}
+#ss3 .label_box>label>input:checked + div {
+    border:green solid 1px;
+    background-color:green;
+    color: #fff;
+}
+.young .label_box>label>input:checked + div {
+    border:green solid 1px;
+    color:green;
+}
+.young .label_box>label>input:checked + div:after {
+    content:'';
+    display:block;
+    width:20px;
+    height:20px;
+    background-color:green;
+    transform:skewY(-45deg);
+    position:absolute;
+    bottom:-10px;
+    right:0;
+    z-index:1;
+    transition: all .5s;
+}
+.young .label_box>label>input:checked + div:before {
+    content:'';
+    display:block;
+    width:3px;
+    height:8px;
+    border-right:#ffffff solid 2px;
+    border-bottom:#ffffff solid 2px;
+    transform:rotate(35deg);
+    position:absolute;
+    bottom:2px;
+    right:4px;
+    z-index:2;
+}
+
+
+/* 图片上传 */
+.myform #ss9,
+.myform #ll9,
+#myproject #pps{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.biao{
+    margin-right: 5px;
+    position: absolute;
+    top: 0;
+    right: 5%;
+}
+.biao>p{
+    font-size: 12px;
+    line-height: 25px;
+    text-align: center;
+}
+.myform .mediu,
+#myproject #pps .mediu{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border: 2px solid rgb(6, 7, 6);
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.myform .pho,
+#myproject #pps .pho{
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+.myform .phh span,
+#myproject #pps .phh span{
+    display: block;
+    text-align: center;
+    width: 100px;
+    line-height: 90px;
+    font-size: 50px;
+    font-weight: 700;
+}
+.myform .ppp,
+#myproject #pps .ppp{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.myform .phh,
+#myproject #pps .phh{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.bigger{
+    text-align: center;
+}
+
+
+/* 弹窗按钮 */
+.layui-layer-btn{
+    display: flex;
+    justify-content: center;
+}
+.layui-layer-page .layui-layer-btn1{
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    border-radius: 5px;
+    background-color:#2D3A4E !important;
+    color: #fff;
+    font-size: 14px;
+}
+.mine .layui-layer-title{
+    background-color:#716E78;
+    color: #fff;
+}
+.mine .layui-layer-btn0{
+    padding: 5px 20px;
+    background-color: #716E78 !important;
+    border-color:  #716E78 !important;
+    /* transform: translateY(-100px); */
+}
+
+
+.exam input{
+    margin-bottom: 20px;
+}
+/* iframe预览图 */
+.layui-layer-iframe>div{
+    overflow: hidden;
+}
+.layui-layer-iframe>div>iframe{
+    width: 105%;
+}
+/* 代码弹窗 */
+
+.develop{
+    width: 100%;
+    height: 100%;
+}
+.develop .main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.main .code{
+    width: 100%;
+    height: 100%;
+}
+.main .code textarea{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    letter-spacing: 2px;
+    background-color:#1E1E1E;
+    color:#fff;
+    outline: none;
+    font-weight: 500;
+    resize: none;
+
+}
+.main .view iframe{
+    width: 300px;
+    height: 100%;
+    background-color:aliceblue;
+}

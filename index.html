@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>享购页面管理中心</title>
+    <link media="screen and (max-width:750px)" rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <style>
+        /* PC端样式 */
+        @media screen and (min-width:750px) {
+            body,div,ul,li,dl,dd,a,img,button,textarea,p,iframe{
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+            body{
+                overflow: hidden; 
+            }
+            /* ::-webkit-scrollbar {
+                width:9px;
+                height:9px; 
+            } */
+            ::-webkit-scrollbar
+            {
+                display:none
+            }
+            /* .noscro::-webkit-scrollbar
+            {
+                display:none
+            } */
+            /* 头部区 */
+
+            .project{
+                position: relative;
+                z-index: 1;
+                display: flex;
+                width: 100%;
+                background-color:#1F2933;
+                height: 50px;
+                box-shadow: rgb(37 39 41) 195px 25px 15px -15px;
+            }
+            .project>li{
+                width: 200px;
+                position: relative;
+                text-align: center;
+                list-style-type: none;
+                line-height: 50px;
+                height: 50px;
+                color: #fff;
+                user-select: none;
+                overflow: hidden;
+            }
+            .app2,.app1{
+                cursor: pointer;
+            }
+            .project li img{
+                width: 40px;
+                height: 40px;
+                border-radius: 30px;
+                margin-bottom: -15px;
+            }
+            .app1:hover,
+            .app2:hover{
+                background-color:#485767;
+            }
+
+            /* 脚部区 */
+            #foo{
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                background-color: #1F2933;
+                color: #fff;
+                /* box-shadow: 0px 20px 70px 5px  #1F2933 inset; */
+            }
+            .hide{
+                display: none;
+            }
+            .show{
+                display: block;
+            }
+            /* 内容区 */
+            #main{
+                width: 100%;
+                /* display: flex; */
+                /* min-height: 80vh; */
+                position: relative;
+                background-color:#E3DFE3;
+            }
+            /* 导航栏区 */
+            #wrap{
+                /* display: block; */
+                width: 200px;
+                height: 100%;
+                position: absolute;
+                text-align: center;
+                background-color:#424c56;
+                user-select: none;
+            }
+            #wrap li>div{
+                line-height: 50px;
+                list-style: none;
+                color: #fff;
+                cursor: pointer;
+                /* box-shadow: -5px 5px 10px #586673; */
+                position: relative;
+            }
+            #wrap li>div:hover{
+                background-color: #697582;
+            }
+            #wrap li{
+                line-height: 50px;
+                list-style: none;
+                color: #fff;
+                cursor: pointer;
+            }
+            #wrap li dd:hover{
+                background-color: #54647d;
+            }
+            #wrap .increase:hover{
+                background-color: #697582;
+            }
+            .ap{
+                background-color:#2d3a4e;
+                box-shadow: rgb(0, 0, 0) 0px 15px 10px -15px inset, rgb(0, 0, 0) 0px -15px 15px -15px inset;
+            }
+            .aa{
+                text-decoration: none;
+                color: #fff;
+            }
+            .orange{
+                color: orange;
+            }
+            
+            /* 内容区 */
+            #card{
+                overflow-y: scroll;
+                /* scroll-snap-type:y mandatory; */
+                height: calc(100vh - 100px);
+                margin-left: 200px;
+                padding: 30px;
+                box-shadow: rgb(0, 0, 0) 25px 0px 15px -15px inset
+            }
+            #cardtain{
+                display: grid;
+                grid-gap:40px;
+                grid-template-columns: repeat(auto-fit,300px);
+                grid-template-rows: repeat(auto-fit,500px);
+            }
+            /* 卡片样式 */
+            #cardtain>div{
+                position: relative;
+                border: 1px solid #8091AB;
+                cursor: pointer;
+                transition: all .5s;
+                box-shadow:
+                1px 1px 4px 0px rgba(250,254,118,0.75),
+                2px 2px 5px -3px rgba(254,159,50,0.75),
+                6px 6px 8px -4px rgba(255,255,0,0.75),
+                6px 6px 8px -4px rgba(0,0,255,2.75),9px 9px 11px -7px rgb(0 0 0 / 66%);
+            }
+            #cardtain>div:hover{
+                box-shadow:0 0 25px 3px #548E7F;
+                transform: scale(1.05);
+            }
+            /* 卡片图片 */
+            #cardtain img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            /* 卡片评级 */
+            #cardtain .leve{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 35px;
+                height: 35px;
+                background-color: rgba(255,255,255,60%);
+                font-size: 24px;
+                text-align: center;
+                color: green;
+                /* border: 1px solid green; */
+                line-height: 35px;
+            }
+            /* 卡片其余内容 */
+            #cardtain .cal{
+                position: absolute;
+                right: 0;
+                top: 0;
+                background-color: rgba(255,255,255,50%);
+                box-sizing: border-box;
+                padding: 5px;
+                /* border: 1px solid green; */
+                letter-spacing: 2px;
+                color: green;
+            }
+            #cardtain .all{
+                box-sizing: border-box;
+                padding: 9px;
+                width: 100%;
+                /* max-height: 40%; */
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                font-size: 15px;
+                color:rgb(6, 7, 6);
+                font-weight: 700;
+                background-color: #bbbbae99;
+            }
+            #cardtain .all>div{
+                line-height: 25px;
+            }
+            /* 卡片编辑按钮 */
+            #cardtain .edit{
+                width: 50px;
+                /* line-height: 50px; */
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                color:green;
+                font-size: 30px;
+                cursor: pointer;
+                outline: none;
+                background-color: rgba(0,0,0,0);
+            }
+            /* 添加卡片 */
+            #cardtain #add{
+                text-align: center;
+                min-width: 300px;
+                min-height: 500px;
+                user-select: none;
+                background-color: #fffbff;
+                position: relative;
+            }
+            #add>.lose1{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -7%;
+                margin-left: -15%;
+                background-color: #000;
+                width: 30%;
+                height: 3%; 
+                transition: all .3s;
+            }
+            #add>.lose2{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -22%;
+                margin-left: -2%;
+                background-color: #000;
+                width: 5%;
+                height: 20%; 
+                transition: all .3s;
+            }
+            #cardtain #add:hover> .lose1{
+                background-color:#548E7F;
+            }
+            #cardtain #add:hover> .lose2{
+                background-color:#548E7F;
+            }
+            #btn{
+                display: none;
+            }
+            /* 阴影 */
+            #tc{
+                display: none;
+            }
+            /* 卡片弹窗 */
+            .view{
+                background-color: #bfbebf !important;
+            }
+            .gray{
+                background-color: #bfbebf !important;
+            }
+            .bigger{
+                width: 100%;
+            }
+            .myform,#myproject{
+                text-align: left;
+                font-size: 14px;
+            }
+            .layui-layer-title{
+                font-size: 16px;
+                text-align: left;
+            }
+            .layui-layer-page .layui-layer-content{
+                padding: 20px 10px 0;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
+                min-width: 320px;
+            }
+            .myform,#muproject{
+                width: 100%;
+            }
+            .myform form,
+            #myproject form{
+                width: 100%;
+            }
+
+            /* 信息说明 */
+            .myform .formhead,
+            #myproject .formhead{
+                display: inline-block;
+                width: 65px;
+                text-align-last:justify;
+            }
+            .dm{
+                line-height: 100px;
+                float: left;
+            }
+            /* 输入框 */
+            .myform input,
+            #myproject input{
+                box-sizing: border-box;
+                display: inline-block;
+                /* float: right; */
+                width: calc(100% - 75px);
+                height: 36px;
+                margin-bottom: 15px;
+                line-height: 30px;
+                padding-left: 10px;
+                color: #333;
+                border-bottom: 2px solid rgb(230, 230, 230);
+                border-right: 2px solid rgb(230, 230, 230);
+                border-top: 2px solid #9c9898;
+                border-left: 2px solid #9c9898;
+                outline: none;
+                /* border-color: rgb(230, 230, 230); */
+            }
+            .myform input,
+            #myproject input,
+            .myform textarea{
+                background-color:#e2dfdf;
+            }
+            /* 输入框选中 */
+            .myform input:focus,
+            #myproject input:focus,
+            .main .code textarea:focus{
+                box-shadow:inset 0px 0px 5px 1px #000;
+                border: 1px solid black;
+            }
+
+            /* 代码框 */
+            .myform textarea{
+                width: calc(100% - 75px);
+                height: 100px;
+                border: 1px solid black;
+                margin-left: 5px;
+                margin-bottom: 10px;
+            }
+            .myform>div{
+                display: flex;
+            }
+
+            /* 单选样式 */
+            .single {
+                /* padding:10px 10px 0 10px; */
+                overflow:hidden;
+                border-bottom:#e5e5e5 solid 1px;
+                border-bottom:none;
+            }
+            #ss3{
+                margin-bottom: 15px;
+            }
+            .single>div:nth-child(1) {
+                width:60px;
+                line-height: 30px;
+            }
+            .fb{
+                line-height: 40px;
+            }
+            .label_box{
+                width: calc(100% - 60px);
+                display: flex;
+                justify-content: center;
+            }
+            .label_box>label {
+                display:block;
+                float:left;
+                margin:0 10px 0 0;
+                position:relative;
+                overflow:hidden;
+            }
+            .label_box>label:last-child{
+                margin: 0;
+            }
+            .label_box>label>input {
+                position:absolute;
+                top:0;
+                left:-20px;
+                width: 0;
+            }
+            .label_box>label>div {
+                width:80px;
+                text-align:center;
+                border:#6f6f6f solid 1px;
+                font-size: 14px;
+                height:35px;
+                line-height:35px;
+                color:black;
+                user-select:none;
+                overflow:hidden;
+                position:relative;
+                transition: all .5s;
+                cursor: pointer;
+                background-color: #d0d0d0;
+            }
+            #ss3 .label_box>label>div{
+                width: 45px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 20px;
+            }
+            #ss3 .label_box>label>input:checked + div {
+                border:green solid 1px;
+                background-color:green;
+                color: #fff;
+            }
+            .young .label_box>label>input:checked + div {
+                border:green solid 1px;
+                color:green;
+            }
+            .young .label_box>label>input:checked + div:after {
+                content:'';
+                display:block;
+                width:20px;
+                height:20px;
+                background-color:green;
+                transform:skewY(-45deg);
+                position:absolute;
+                bottom:-10px;
+                right:0;
+                z-index:1;
+                transition: all .5s;
+            }
+            .young .label_box>label>input:checked + div:before {
+                content:'';
+                display:block;
+                width:3px;
+                height:8px;
+                border-right:#ffffff solid 2px;
+                border-bottom:#ffffff solid 2px;
+                transform:rotate(35deg);
+                position:absolute;
+                bottom:2px;
+                right:4px;
+                z-index:2;
+            }
+
+            /* 上传图片 */
+            .myform #ss9,
+            .myform #ll9,
+            #myproject #pps{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            .biao{
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin-right: 5px;
+            }
+            .biao>p{
+                font-size: 12px;
+                line-height: 25px;
+                text-align: center;
+            }
+            .myform .mediu,
+            #myproject #pps .mediu{
+                width: 100px;
+                height: 100px;
+                position: relative;
+                border: 2px solid rgb(6, 7, 6);
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+            .myform .pho,
+            #myproject #pps .pho{
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 0;
+                z-index: 1;
+                cursor: pointer;
+            }
+            .myform .phh span,
+            #myproject #pps .phh span{
+                text-align: center;
+                display: block;
+                width: 100px;
+                line-height: 90px;
+                font-size: 50px;
+                font-weight: 700;
+            }
+            .myform .ppp,
+            #myproject #pps .ppp{
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: none;
+            }
+            .myform .phh,
+            #myproject #pps .phh{
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .bigger{
+                text-align: center;
+            }
+
+            /* 提交按钮 */
+            .layui-layer-btn{
+                display: flex;
+                justify-content: space-around;
+                padding-bottom: 25px !important;
+            }
+            .layui-layer-page .layui-layer-btn1{
+                position: absolute;
+                top: 40px;
+                left: 15px;
+                font-size: 14px;
+                color: #fff;
+                background-color:#424C56 !important;
+                border-radius: 5px;
+            }
+            .layui-layer-molv .layui-layer-page .layui-layer-btn1{
+                padding: 5px 9px;
+                font-size: 14px;
+                letter-spacing: 1px;
+                height: 19px;
+                line-height: 19px;
+            }
+            .mine .layui-layer-title{
+                background-color:#424C56;
+                color: #fff;
+            }
+            .mine .layui-layer-btn0{
+                padding: 5px 20px;
+                background-color: #424C56 !important;
+                border-color:  #424C56 !important;
+            }
+            .emd .layui-layer-btn1{
+                padding: 5px 20px;
+            }
+
+            /* 预览iframe */
+            .layui-layer-iframe iframe{
+                width: 105% !important;
+            }
+            .layui-layer-content{
+                overflow: hidden;
+            }
+
+            /* 代码弹窗 */
+            .develop{
+                width: 100%;
+                height: 100%;
+            }
+            .develop .main{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+            .main .code{
+                width: 100%;
+                margin-right: 30px;
+            }
+            .main .code textarea{
+                padding: 10px;
+                min-width: 650px;
+                width: 100%;
+                height: 100%;
+                background-color:#1E1E1E;
+                color:#fff;
+                outline: none;
+                font-weight: 500;
+                font-size: 16px;
+                letter-spacing:2px;
+                resize: none;
+            }
+            /* 手机样式 */
+            .device *,
+            .device *::before,
+            .device *::after {
+                box-sizing: border-box;
+                display: block;
+            }
+            .device {
+                /* margin: 0 auto; */
+                position: relative;
+            }
+            .device .frame {
+                z-index: 1;
+            }
+            
+            .iphone-x {
+                height: 100%;
+                width: 342px;
+            }
+            .iphone-x .frame {
+                background: #222;
+                border-radius: 54px;
+                box-shadow: inset 0 0 0 2px #606467, inset 0 0 0 6px #e2e3e4;
+                height: 694px;
+                padding: 22px;
+                width: 342px;
+            }
+            
+            .iphone-x .content {
+                background-color: #fff;
+                background-image: url("bg.jpg");
+                background-position: center center;
+                background-size: cover;
+                border-radius: 32px;
+                height: 650px;
+                position: relative;
+                width: 300px;
+                overflow: hidden;
+            }
+            .iphone-x .content .time{
+                width: 300px;
+                height: 21px;
+            }
+            .iphone-x .content #vip{
+                width: 106%;
+                height: 100%;
+                overflow-y: scroll;
+            }
+            .iphone-x .stripe::after,
+            .iphone-x .stripe::before {
+                border: solid rgba(51, 51, 51, .25);
+                border-width: 0 6px;
+                content: "";
+                height: 5px;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                z-index: 9;
+            }
+            
+            .iphone-x .stripe::after {
+                top: 68px;
+            }
+            
+            .iphone-x .stripe::before {
+                bottom: 68px;
+            }
+            .iphone-x .header {
+                background: #222;
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
+                height: 24px;
+                left: 50%;
+                margin-left: -82px;
+                position: absolute;
+                top: 22px;
+                width: 164px;
+                z-index: 199;
+            }
+            
+            .iphone-x .header::after,
+            .iphone-x .header::before {
+                content: "";
+                height: 6px;
+                position: absolute;
+                top: 0;
+                width: 6px;
+            }
+            
+            .iphone-x .header::after {
+                background: radial-gradient(circle at bottom left, transparent 0, transparent 75%, #222 75%, #222 100%);
+                left: -6px;
+            }
+            
+            .iphone-x .header::before {
+                background: radial-gradient(circle at bottom right, transparent 0, transparent 75%, #222 75%, #222 100%);
+                right: -6px;
+            }
+            
+            .iphone-x .sensors::after,
+            .iphone-x .sensors::before {
+                content: "";
+                position: absolute;
+            }
+            
+            .iphone-x .sensors::after {
+                background: #444;
+                border-radius: 2.5px;
+                height: 5px;
+                left: 50%;
+                margin-left: -20px;
+                top: 4px;
+                width: 40px;
+            }
+            
+            .iphone-x .sensors::before {
+                background: #444;
+                border-radius: 50%;
+                height: 11px;
+                left: 50%;
+                margin-left: 30px;
+                top: 1px;
+                width: 11px;
+            }
+            .iphone-x .btns {
+                background: #606467;
+                height: 26px;
+                left: -2px;
+                position: absolute;
+                top: 92px;
+                width: 3px;
+            }
+            
+            .iphone-x .btns::after,
+            .iphone-x .btns::before {
+                background: #606467;
+                content: "";
+                height: 50px;
+                left: 0;
+                position: absolute;
+                width: 3px;
+            }
+            
+            .iphone-x .btns::after {
+                top: 48px;
+            }
+            
+            .iphone-x .btns::before {
+                top: 112px;
+            }
+            
+            .iphone-x .power {
+                background: #606467;
+                height: 80px;
+                position: absolute;
+                right: -2px;
+                top: 160px;
+                width: 3px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 头部区 -->
+    <header>
+        <ul id="top" class="project"></ul>
+    </header>
+    <article>
+        <div id="main">
+            <!-- 导航区 -->
+            <ul id="wrap"></ul>
+            <!-- 内容区 -->
+            <div id="card">
+                <div id="cardtain"></div>
+            </div>
+            <!-- 项目弹窗 -->
+            <div class="bigger hide">
+                <form action="" id="myproject" autocomplete="off">
+                    <div class="formhead">项目名称:</div>
+                    <input type='text' id= 'pp1' class='layui-layer-input' name='name' placeholder='输入项目名称'>
+                    <br>
+                    <div class="formhead">指导老师:</div>
+                    <input type='text' id='pp2' class='layui-layer-input' name='teacher' placeholder='输入项目老师'>
+                    <br>
+                    <div class="formhead">描 述:</div>
+                    <input type='text' id= 'pp3' class='layui-layer-input' name='description' placeholder='输入项目描述'>
+                    <br>
+                    <div class="formhead">关键字:</div>
+                    <input type='text' id= 'pp4' class='layui-layer-input' name='keywords' placeholder='输入关键字'>
+                    <br>
+                    <div id='pps'>
+                        <div class='mediu'>
+                            <div class='phh'>
+                                <span>+</span>
+                                <input accept="image/png, image/jpeg, image/gif, image/jpg" type='file' id='tx' onchange='headload(this)' class='layui-layer-input pho' name='photo'>
+                            </div>
+                            <img class='ppp' id="proImg" src='#' alt=''>
+                        </div>
+                        <div class="biao">
+                            <p>图片大小<br>＜＝100KB</p>
+                            <p>图片尺寸<br>＜＝120*120</p>
+                        </div>
+                    </div>
+                    <div class="formhead">图片路径:</div>
+                    <input type='text' id= 'pp5' class='layui-layer-input' name='gravatar' placeholder='输入头像地址'>
+                    <br>
+                    <div class="formhead">办公地点:</div>
+                    <input type='text' id= 'pp6' class='layui-layer-input' name='office' placeholder='输入办公地点'/></form>
+                </form>
+            </div>
+            <!-- 落地页弹窗 -->
+            <div class="landing myform hide" id="form1">
+                <form action="" id="landingform" autocomplete="off">
+                    <div class="formhead">发布日期:</div>
+                    <input type='date' id= 'ss1' class='layui-layer-input' name='releasedate' placeholder='输入发布日期'>
+                    <br>
+                    <div class="formhead">作 者:</div>
+                    <input type='text' id='ss2' class='layui-layer-input' name='author' placeholder='输入作者'>
+                    <br>
+                    <div class="formhead">标 题:</div>
+                    <input type='text' id= 'ss4' class='layui-layer-input' name='title' placeholder='输入页面标题'>
+                    <br>
+                    <div class="formhead">描 述:</div>
+                    <input type='text' id= 'ss6' class='layui-layer-input' name='description' placeholder='输入页面描述'>
+                    <br>
+                    <div id='ss9'>
+                        <div class='mediu'>
+                            <div class='phh'>
+                                <span>+</span>
+                                <input accept="image/png, image/jpeg, image/gif, image/jpg" type='file' id='tp' onchange='uploade(this)' class='layui-layer-input pho' name='photo'>
+                            </div>
+                            <img class='ppp' id=preImg src='#' alt=''>
+                        </div>
+                        <div class="biao">
+                            <p>图片大小<br>＜＝500KB</p>
+                            <p>图片尺寸<br>>=320*568</p>
+                        </div>
+                    </div>
+                    <div class="formhead">图片路径:</div>
+                    <input type='text' id='ss5' class='layui-layer-input' name='screenshot' placeholder='输入图片路径'/>
+                    <br>
+                    <div class="formhead dm">网站代码:</div>
+                    <textarea type='text' id= 'ss8' class='layui-layer-input' name='html' placeholder='输入html代码' onclick="choice(this.value)"></textarea>    
+                </form>
+                <div id='ss3' class="single">
+                    <div class="formhead">评级:</div>
+                    <div class="label_box">
+                        <label>
+                            <input type="radio" name="grade" value='A'>
+                            <div>A</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="grade" value='B'>
+                            <div>B</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="grade" value='C'>
+                            <div>C</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="grade" value='D'>
+                            <div>D</div>
+                        </label>
+                    </div>
+                </div>
+                <div id='ss7' class="single young">
+                    <div class="formhead fb">发布状态:</div>
+                    <div class="label_box">
+                        <label>
+                            <input type="radio" name="status" value=0>
+                            <div>未发布</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="status" value=1>
+                            <div>已发布</div>
+                        </label>
+                    </div>
+                </div>
+                <!-- <button>提交</button> -->
+            </div>
+            <!-- 审核页弹窗 -->
+            <div class="audit myform hide">
+                <!-- <button class="dele">删除页面</button> -->
+                <form action="" id="auditform" autocomplete="off">
+                    <div class="formhead">发布日期:</div>
+                    <input type='date' id='ll1' class='layui-layer-input' name='releasedate' placeholder='输入发布日期'>
+                    <br>
+                    <div class="formhead">标 题:</div>
+                    <input type='text' id= 'll4' class='layui-layer-input' name='title' placeholder='输入页面标题'>
+                    <br>
+                    <!-- 上传图片 -->
+                    <div id= 'll9'>
+                        <div class='mediu'>
+                            <div class='phh'>
+                                <span>+</span>
+                                <input accept="image/png, image/jpeg, image/gif, image/jpg" type='file' id='tt' onchange='uploade(this)' class='layui-layer-input pho' name='photo'>
+                            </div>
+                            <img class='ppp' id="ppImg" src='#' alt=''>
+                        </div>
+                        <div class="biao">
+                            <p>图片大小<br>＜＝500KB</p>
+                            <p>图片尺寸<br>>=320*568</p>
+                        </div>
+                    </div>
+                    <div class="formhead">图片路径:</div>
+                    <input type='text' id='ll5' class='layui-layer-input' name='screenshot' placeholder='输入图片路径'/>
+                    <br>
+                    <div class="formhead dm">网站代码:</div>
+                    <textarea type='text' id= 'll8' class='layui-layer-input' name='html' placeholder='输入html代码' onclick="choice(this.value)"></textarea>
+                </form>
+                <div id='ll7' class="young">
+                    <div class="formhead fb">发布状态:</div>
+                    <div class="label_box">
+                        <label>
+                            <input type="radio" name="status" value=0>
+                            <div>未发布</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="status" value=1>
+                            <div>已发布</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- 代码弹窗 -->
+            <div class="develop hide">
+                <div class="main">
+                    <div class="code">
+                        <textarea name="" id="tet" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="device iphone-x">
+                        <!--    外部轮廓    -->
+                        <div class="frame">
+                            <div class="content">
+                                <div class="time"></div>
+                                <iframe name="gift" id="vip" src="" class="noscro">
+                                </iframe>
+                            </div>
+                        </div>
+                 
+                        <!--    天线    -->
+                        <div class="stripe"></div>
+                 
+                        <!--    听筒孔    -->
+                        <div class="header">
+                            <div class="sensors"></div>
+                        </div>
+                 
+                        <!--    按键    -->
+                        <div class="btns"></div>
+                        <div class="power"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 移动端导航栏按钮 -->
+            <div id="btn" class="show">展开</div>
+            <!-- 移动端导航栏阴影 -->
+            <div id="tc" class="hide"></div>
+        </div>
+    </article>
+    <footer>
+        <div id="foo">@享购贸易</div>
+    </footer>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="layer/layer.js"></script>
+    <script src="./index.js"></script>
+    
+    
+</body>
+</html>
